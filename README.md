@@ -6,5 +6,5 @@ Under this directory you can find build scripts for Docker images (Dockerfiles) 
 * IBM MQ for Developers https://hub.docker.com/r/ibmcom/mq/
 * IBM WebSphere Application Server traditional for Developers https://hub.docker.com/r/ibmcom/websphere-traditional/developers
 * IBM Master Data Management
-	* Stewardship Center
-	* Workbench
+* Stewardship Center
+* Workbench
