@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='/opt/IBM/IBMIMShared'/>
+  </variables>
+  <server>
+    <repository location='/tmp/mdm/mdmseae'/>
+  </server>
+  <profile id='InfoSphere MDM Standard Edition or Advanced Edition 0.4' installLocation='/opt/IBM/MDM'>
+    <data key='cic.selector.arch' value='x86_64'/>
+    <data key='user.select.existing.tablespaces.DO_NOT_MODIFY,com.ibm.mdm.advanced.0.4' value='useexisting'/>
+    <data key='user.table.space.eme.1,com.ibm.mdm.advanced.0.4' value='EMESPACE1'/>
+    <data key='user.table.space.eme.2,com.ibm.mdm.advanced.0.4' value='EMESPACE2'/>
+    <data key='user.table.space.16k,com.ibm.mdm.advanced.0.4' value='TBS16K'/>
+    <data key='user.create.tablespaces.flag,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.table.space.8k,com.ibm.mdm.advanced.0.4' value='TBS8K'/>
+    <data key='user.table.space.index,com.ibm.mdm.advanced.0.4' value='INDEXSPACE1'/>
+    <data key='user.table.space.long,com.ibm.mdm.advanced.0.4' value='LONGSPACE1'/>
+    <data key='user.db.selected,com.ibm.mdm.advanced.0.4' value='DB2'/>
+    <data key='user.table.space.4k,com.ibm.mdm.advanced.0.4' value='TBS4K'/>
+    <data key='user.db.load.details.DO_NOT_MODIFY,com.ibm.mdm.advanced.0.4' value='true'/>
+    <data key='user.code.lang.list.mds,com.ibm.mdm.advanced.0.4' value='en'/>
+    <data key='user.code.lang.list,com.ibm.mdm.advanced.0.4' value='en'/>
+    <data key='user.delete.trigger.type,com.ibm.mdm.advanced.0.4' value='Compound'/>
+    <data key='user.mdm.data.type,com.ibm.mdm.advanced.0.4' value='manufacturing'/>
+    <data key='user.trigger.type,com.ibm.mdm.advanced.0.4' value='Compound'/>
+    <data key='user.mdm.industry.type.temp,com.ibm.mdm.advanced.0.4' value='Manufacturing'/>
+    <data key='user.insensitive.search,com.ibm.mdm.advanced.0.4' value='true'/>
+    <data key='user.customer.lang.type,com.ibm.mdm.advanced.0.4' value='en'/>
+    <data key='user.was.truststore.pwd,com.ibm.mdm.advanced.0.4' value='WebAS'/>
+    <data key='user.was.default.trust.store,com.ibm.mdm.advanced.0.4' value='true'/>
+    <data key='user.mdm.edition.offering.id' value='com.ibm.mdm.advanced.0.4'/>
+    <data key='user.config.messaging.server,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.messaging.type,com.ibm.mdm.advanced.0.4' value='WEM'/>
+    <data key='user.messaging.port,com.ibm.mdm.advanced.0.4' value='1414'/>
+    <data key='user.messaging.qm,com.ibm.mdm.advanced.0.4' value='MDM.queue.mgr'/>
+    <data key='user.messaging.user,com.ibm.mdm.advanced.0.4' value='mquser'/>
+    <data key='user.default.messaging.flag,com.ibm.mdm.advanced.0.4' value='true'/>
+    <data key='user.messaging.channel,com.ibm.mdm.advanced.0.4' value='MDM.SRV.CH'/>
+    <data key='user.instance.identifier' value='E001'/>
+    <!-- Business Administration -->
+    <data key='user.skip.enter.ba.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.type.ba,com.ibm.mdm.advanced.0.4' value='Base'/>
+    <data key='user.deploy.host.ba,com.ibm.mdm.advanced.0.4' value='localhost'/>
+    <data key='user.deploy.port.ba,com.ibm.mdm.advanced.0.4' value='8880'/>
+    <data key='user.was.cluster.flag.ba,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.cluster.ba,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.was.node.ba,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
+    <data key='user.was.cell.ba,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
+    <data key='user.was.server.ba,com.ibm.mdm.advanced.0.4' value='server1'/>
+    <data key='user.was.profile.home.ba,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
+    <data key='user.was.new.server.check.ba,com.ibm.mdm.advanced.0.4' value='false'/>    
+    <data key='user.was.user.ba,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
+    <data key='user.was.password.ba,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
+    <data key='user.was.home.ba,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.was.security.ba,com.ibm.mdm.advanced.0.4' value='1'/>
+    <!--Inspector -->
+    <data key='user.skip.enter.inspector.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.type.inspector,com.ibm.mdm.advanced.0.4' value='Base'/>
+    <data key='user.deploy.host.inspector,com.ibm.mdm.advanced.0.4' value='localhost'/>
+    <data key='user.deploy.port.inspector,com.ibm.mdm.advanced.0.4' value='8880'/>
+    <data key='user.was.cluster.inspector,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.was.cluster.flag.inspector,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.node.inspector,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
+    <data key='user.was.cell.inspector,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
+    <data key='user.was.server.inspector,com.ibm.mdm.advanced.0.4' value='server1'/>
+    <data key='user.was.profile.home.inspector,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
+    <data key='user.was.new.server.check.inspector,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.user.inspector,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
+    <data key='user.was.password.inspector,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
+    <data key='user.was.home.inspector,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.was.security.inspector,com.ibm.mdm.advanced.0.4' value='1'/>
+    <data key='user.use.ssl.inspector,com.ibm.mdm.advanced.0.4' value='false'/>
+    <!-- Enterprise Viewer -->
+    <data key='user.skip.enter.ev.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.type.ev,com.ibm.mdm.advanced.0.4' value='Base'/>
+    <data key='user.deploy.host.ev,com.ibm.mdm.advanced.0.4' value='localhost'/>
+    <data key='user.deploy.port.ev,com.ibm.mdm.advanced.0.4' value='8880'/>
+    <data key='user.was.cluster.ev,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.was.cluster.flag.ev,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.node.ev,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
+    <data key='user.was.cell.ev,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
+    <data key='user.was.server.ev,com.ibm.mdm.advanced.0.4' value='server1'/>
+    <data key='user.was.profile.home.ev,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
+    <data key='user.was.new.server.check.ev,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.user.ev,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
+    <data key='user.was.password.ev,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
+    <data key='user.was.home.ev,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.was.security.ev,com.ibm.mdm.advanced.0.4' value='1'/>
+    <data key='user.use.ssl.ev,com.ibm.mdm.advanced.0.4' value='false'/>
+	<!-- Web Reports -->
+    <data key='user.skip.enter.wb.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.type.wb,com.ibm.mdm.advanced.0.4' value='Base'/>
+    <data key='user.deploy.host.wb,com.ibm.mdm.advanced.0.4' value='localhost'/>   
+    <data key='user.deploy.port.wb,com.ibm.mdm.advanced.0.4' value='8880'/>
+    <data key='user.was.cluster.wb,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.was.cluster.flag.wb,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.node.wb,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
+    <data key='user.was.cell.wb,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
+    <data key='user.was.server.wb,com.ibm.mdm.advanced.0.4' value='server1'/>
+    <data key='user.was.profile.home.wb,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>    
+    <data key='user.was.new.server.check.wr,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.user.wb,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
+    <data key='user.was.password.wb,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
+    <data key='user.was.home.wb,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.was.security.wb,com.ibm.mdm.advanced.0.4' value='1'/>
+    <data key='user.use.ssl.wb,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.table.space.4k.persist' value='TBS4K'/>
+    <data key='user.table.space.8k.persist' value='TBS8K'/>
+    <data key='user.table.space.16k.persist' value='TBS16K'/>
+    <data key='user.index.space.persist' value='INDEXSPACE1'/>
+    <data key='user.eme.sppmd.space.persist' value='EMESPACE1'/>
+    <data key='user.eme.sppmi.space.persist' value='EMESPACE2'/>
+    <data key='user.long.space.persist' value='LONGSPACE1'/>
+    <data key='user.db.auth.native,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.db.host,com.ibm.mdm.advanced.0.4' value='172.17.0.2'/>
+    <data key='user.db.type,com.ibm.mdm.advanced.0.4' value='DB2'/>
+    <data key='user.db.schema,com.ibm.mdm.advanced.0.4' value='MDMDB1'/>
+    <data key='user.db.ssl.enabled,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.db.password,com.ibm.mdm.advanced.0.4' value='mdmdb1pwd'/>
+    <data key='user.db.ssl.store.type,com.ibm.mdm.advanced.0.4' value='none'/>
+    <data key='user.db.home,com.ibm.mdm.advanced.0.4' value='/home/db2inst1/sqllib'/>
+    <data key='user.L1.was.home,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.mdm.db.connection.skip.test,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.db.name.remote,com.ibm.mdm.advanced.0.4' value='MDMDB'/>
+    <data key='user.db.user,com.ibm.mdm.advanced.0.4' value='mdmdb1'/>
+    <data key='user.db.ssl.net.version,com.ibm.mdm.advanced.0.4' value='1.0'/>
+    <data key='user.db.port,com.ibm.mdm.advanced.0.4' value='50000'/>
+    <data key='user.db.name,com.ibm.mdm.advanced.0.4' value='MDMDB'/>
+    <data key='user.oracle.rac,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.db.ssl.password,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.db2.home,com.ibm.mdm.advanced.0.4' value='/home/db2inst1/sqllib'/>
+    <data key='user.install.db.manuall,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.tns.name,com.ibm.mdm.advanced.0.4' value='none'/>
+    <data key='user.was.type.persist' value='Base'/>
+    <data key='user.L1.was.home.persist' value='/opt/IBM/WebSphere/AppServer'/>
+    <data key='user.deploy.host.persist' value='localhost'/>
+    <data key='user.deploy.port.persist' value='8880'/>
+    <data key='user.was.user.persist' value='wsadmin'/>
+    <data key='user.was.password.persist' value='wsadminpwd'/>
+    <data key='user.was.cell.persist' value='DefaultCell01'/>
+    <data key='user.was.node.persist' value='DefaultNode01'/>
+    <data key='user.was.server.persist' value='server1'/>
+    <data key='user.was.server.new.persist' value='none'/>
+    <data key='user.was.cluster.persist' value='None'/>
+    <data key='user.was.cluster.flag.persist' value='false'/>
+    <data key='user.was.profile.home.persist' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
+    <data key='user.remote.server.checkbox.persist' value='false'/>
+    <data key='user.was.cluster,com.ibm.mdm.advanced.0.4' value='None'/>
+    <data key='user.was.user,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
+    <data key='user.was.profile.home,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
+    <data key='user.deploy.host,com.ibm.mdm.advanced.0.4' value='localhost'/>
+    <data key='user.was.server.new,com.ibm.mdm.advanced.0.4' value='none'/>
+    <data key='user.was.suppress.warning,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.new.server.checkbox,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.remote.server.checkbox,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.launch.config.from.silent.install.flag,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.was.type,com.ibm.mdm.advanced.0.4' value='Base'/>
+    <data key='user.was.password,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
+    <data key='user.was.server,com.ibm.mdm.advanced.0.4' value='server1'/>
+    <data key='user.was.cluster.flag,com.ibm.mdm.advanced.0.4' value='false'/>
+    <data key='user.deploy.port,com.ibm.mdm.advanced.0.4' value='8880'/>
+    <data key='user.was.cell,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
+    <data key='user.was.node,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
+    <data key='user.mtz.tz,com.ibm.mdm.advanced.0.4' value='US/Eastern'/>
+    <data key='user.mdm.admin.password.temp,com.ibm.mdm.advanced.0.4' value='mdmadminpwd'/>
+    <data key='user.rmi.port,com.ibm.mdm.advanced.0.4' value='9999'/>
+    <data key='user.L2.was.admin.password,com.ibm.mdm.advanced.0.4' value='mdmadminpwd'/>
+    <data key='user.mtz.enabled,com.ibm.mdm.advanced.0.4' value='true'/>
+    <data key='user.mdm.passwordConfirm,com.ibm.mdm.advanced.0.4' value='mdmadminpwd'/>
+    <data key='user.engine.type,com.ibm.mdm.advanced.0.4' value='PME'/>
+    <data key='user.was.admin.user,com.ibm.mdm.advanced.0.4' value='mdmadmin'/>
+    <data key='user.was.application,com.ibm.mdm.advanced.0.4' value='E001'/>
+    <data key='user.db.type' value='DB2'/>
+  </profile>
+  <install>
+    <!-- InfoSphere MDM Standard Edition or Advanced Edition 11.6.0.4 -->
+    <offering profile='InfoSphere MDM Standard Edition or Advanced Edition 0.4' id='com.ibm.mdm.advanced.0.4' version='11.6.0.FP04IF000_20171205-0358' features='com.ibm.mdm.install.feature'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>
