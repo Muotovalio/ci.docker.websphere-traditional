@@ -1,8 +1,10 @@
-# WebSphere Application Server traditional and Docker
+# IBM Master Data Management Advanced Edition and Docker
 
-Under this directory you can find build scripts for Docker images (Dockerfiles) and related documentation for WebSphere Application Server traditional. 
+Under this directory you can find build scripts for Docker images (Dockerfiles) and related documentation for IBM Master Data Management Advanced Edition. 
 
-* [WebSphere Application Server for Developers traditional](developer)
-* WebSphere Application Server traditional
-  * [Base](base)
-  * [Network Deployment](network-deployment)
+* IBM DB2 Express-C https://hub.docker.com/r/ibmcom/db2express-c/
+* IBM MQ for Developers https://hub.docker.com/r/ibmcom/mq/
+* IBM WebSphere Application Server traditional for Developers https://hub.docker.com/r/ibmcom/websphere-traditional/developers
+* IBM Master Data Management
+	* Stewardship Center
+	* Workbench
