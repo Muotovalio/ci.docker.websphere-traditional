@@ -21,9 +21,9 @@ Use this image to set up an IBM DB2 database for an installation of InfoSphere M
 
 - [ ] Copy database scripts to the ddl folder
 
-... The scripts to create IBM® DB2® databases and table spaces are located in STARTUPKIT_INSTALL_HOME/CoreData/Full/DB2/Standard/ddl/
-... CreateDB.sql
-...	CreateTS.sql
+      The scripts to create IBM® DB2® databases and table spaces are located in STARTUPKIT_INSTALL_HOME/CoreData/Full/DB2/Standard/ddl/
+      * CreateDB.sql
+      * CreateTS.sql
 
 - [ ] Build an image from a Dockerfile
 
@@ -45,7 +45,9 @@ docker exec -it mdm-db bash
 
 ## License
 
-The Dockerfile and associated scripts are licensed under the Apache License 2.0. The license for DB2 Express-C can be found [online](http://www-03.ibm.com/software/sla/sladb.nsf/displaylis/5DF1EE126832D3F185257DAB0064BEFA?OpenDocument).
+The Dockerfile and associated scripts are licensed under the Apache License 2.0. 
+
+The license for DB2 Express-C can be found [online](http://www-03.ibm.com/software/sla/sladb.nsf/displaylis/5DF1EE126832D3F185257DAB0064BEFA?OpenDocument).
 
 ## References
 
