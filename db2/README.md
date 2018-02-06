@@ -6,7 +6,7 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 
 ## What is IBM DB2 Express-C
 
-``IBM DB2 Express-C``` is the no-charge community edition of DB2 server, a simple, flexible, powerful, and reliable relational database server. 
+IBM DB2 Express-C is the no-charge community edition of DB2 server, a simple, flexible, powerful, and reliable relational database server. 
 It is easy to install, embed, deploy, and available for download, deployment, and redistribution at no charge.
 
 Use this image to set up an IBM DB2 database for an installation of InfoSphere MDM.
