@@ -82,7 +82,7 @@ You can start and stop applications using wsadmin tool and scripting
 /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user wsadmin -password wsadminpwd -f /share/install/stopApplication.py <name>
 ```
 
-where <name> is:
+where &lt;name&gt; is:
 * ba-App-E001
 * mdm_consentmgmt_app-E001
 * inspector-E001 
