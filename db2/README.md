@@ -1,9 +1,5 @@
 # IBM DB2 Express-C
 
-## Supported tags
-
-11.6.0.4
-
 ## What is IBM Master Data Management Advanced Edition
 
 IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to work together to provide a comprehensive set of MDM capabilities.
@@ -15,18 +11,13 @@ It is easy to install, embed, deploy, and available for download, deployment, an
 
 Use this image to set up an IBM DB2 database for an installation of InfoSphere MDM.
 
+## Supported tags
+
+11.6.0.4
+
 ## How to use this image
 
 ### Build
-
-1. Copy database scripts to the ddl folder
-
-  The scripts to create IBM DB2 databases and table spaces are located in STARTUPKIT_INSTALL_HOME/CoreData/Full/DB2/Standard/ddl/
-  * CreateDB.sql
-  * CreateTS.sql
-
-1 Build an image from a Dockerfile
-
 
 - [ ] Copy database scripts to the ddl folder
 
