@@ -12,6 +12,21 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 
 ### Build
 
+
+Acquiring and extracting the installation files
+
+- [] Download the installation image files from IBM Passport Advantage / Software Download
+	
+	Extract the files into the mdm directory
+	
+	* IBM InfoSphere Master Data Management Standard & Advanced Edition V11.6.0.4, Multiplatform Multilingual eAssembly 
+	
+	* IBM InfoSphere Master Data Management Standard and Advanced Edition Mulitplatform Multilingual V11.6.0.4 Part 1 (CNPB8EN )
+	* IBM InfoSphere Master Data Management Standard & Advanced Edition Mulitplatform Multilingual V11.6.0.4 Part 2 (CNPB9EN )
+	* IBM InfoSphere Master Data Management Workbench Standard & Advanced Edition Mulitplatform Multilingual V11.6.0.4 (CNPC0EN )
+	* IBM InfoSphere Master Data Management Standard & Advanced Edition v11.6.0.1 Base Pattern for IBM PureApplication System Multilingual (CNF46ML )
+	* License Information - IBM InfoSphere Master Data Management Standard & Advanced, V11.6 .0.4 Multilingual (CNPC1EN )
+
 - [ ] Copy IBM Data Server Driver Package (DS driver) to the "was/dsdriver" folder
 
 * v10.5fp9_linuxx64_client.tar.gz
@@ -128,5 +143,13 @@ imcl install
 * Clean up dockerfile / utilities / directories
 
 * Fixpack
+
+
+
+
+Installing IBM InfoSphere Master Data Management Standard and Advanced Editions
+
+	https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/Topics/installing_std_adv_editions.html
+
 
    
