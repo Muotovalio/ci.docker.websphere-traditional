@@ -82,25 +82,30 @@ You can start and stop applications using wsadmin tool and scripting
 /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user wsadmin -password wsadminpwd -f /share/install/stopApplication.py <name>
 ```
 
+where <name> is:
 * ba-App-E001
 * mdm_consentmgmt_app-E001
+* inspector-E001 
+* enterpriseviewer-E001
+* webreports-E001
 
-Business Administration UI
+### Business Administration UI
 https://localhost:9443/CustomerBusinessAdminWeb/faces/login.jsp
 
-Consent Management UI
-https://localhost:9443
+### Consent Management UI
+https://localhost:9443/mdmconsent/
 
-Inspector
+### Inspector
 https://localhost:9443/inspector/common/login.ihtml
 
-Enterprise Viewer
+### Enterprise Viewer
 https://localhost:9443/accessweb/empi/MITLogin.jsp
 
-Web Reports
+### Web Reports
 https://localhost:9443/webreports/common/login.html
 
-### IBM Installation Manager
+
+## IBM Installation Manager
 
 Installation Manager is installed in /home/was/IBM/InstallationManager/eclipse directory
 
