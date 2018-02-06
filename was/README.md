@@ -1,23 +1,21 @@
 # IBM MDM Advanced Edition
 
-## Supported tags
-
-11.6.0.4
-
 ## What is IBM Master Data Management Advanced Edition
 
 IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to work together to provide a comprehensive set of MDM capabilities.
+
+## Supported tags
+
+11.6.0.4
 
 ## How to use this image
 
 ### Build
 
 
-Acquiring and extracting the installation files
-
-- [] Download the installation image files from IBM Passport Advantage / Software Download
+- [ ] Download the installation image files from IBM Passport Advantage / Software Download
 	
-	Extract the files into the mdm directory
+- [ ] Extract the files into the "mdm" directory
 	
 	* IBM InfoSphere Master Data Management Standard & Advanced Edition V11.6.0.4, Multiplatform Multilingual eAssembly 
 	
@@ -27,28 +25,29 @@ Acquiring and extracting the installation files
 	* IBM InfoSphere Master Data Management Standard & Advanced Edition v11.6.0.1 Base Pattern for IBM PureApplication System Multilingual (CNF46ML )
 	* License Information - IBM InfoSphere Master Data Management Standard & Advanced, V11.6 .0.4 Multilingual (CNPC1EN )
 
-- [ ] Copy IBM Data Server Driver Package (DS driver) to the "was/dsdriver" folder
+- [ ] Copy IBM Data Server Driver Package (DS driver) to the "db2" folder
 
-* v10.5fp9_linuxx64_client.tar.gz
+	* v10.5fp9_linuxx64_client.tar.gz
 
 - [ ] Copy IBM Installation Manager file to the "was/im" folder
 
-* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
+	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
 
 - [ ] Extract the IBM InfoSphere MDM  installation image files to the "was/install" folder
 
-* mdm_installer-11.6.0.4-mdmseae_web.tar.gz 
-* mdm_installer-11.6.0.4-at4bpm_web.tar.gz
-* mdm_installer-11.6.0.4-mdph_web.tar.gz
+	* mdm_installer-11.6.0.4-mdmseae_web.tar.gz 
+	* mdm_installer-11.6.0.4-at4bpm_web.tar.gz
+	* mdm_installer-11.6.0.4-mdph_web.tar.gz
 
 - [ ] Build Master Data Management image
-```
-docker build -t mdm-was:11.6.0.4 .
-```
+	
+	```
+	docker build -t mdm-was:11.6.0.4 .
+	```
 
-You can ignore the following warnings:
-* debconf: delaying package configuration, since apt-utils is not installed
-* DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "libstdc++.so.6". 
+	You can ignore the following warnings:
+	* debconf: delaying package configuration, since apt-utils is not installed
+	* DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "libstdc++.so.6". 
 
 ### Start WAS in a new container
 
