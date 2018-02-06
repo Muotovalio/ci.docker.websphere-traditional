@@ -21,21 +21,19 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 	* IBM InfoSphere Master Data Management Standard & Advanced Edition v11.6.0.1 Base Pattern for IBM PureApplication System Multilingual (CNF46ML )
 	* License Information - IBM InfoSphere Master Data Management Standard & Advanced, V11.6 .0.4 Multilingual (CNPC1EN )
 	
-- [ ] Extract the files into the "mdm" directory
+- [ ] Extract the IBM InfoSphere MDM installation image files to the ```mdm``` folder
+
+	* mdm_installer-11.6.0.4-mdmseae_web.tar.gz 
+	* mdm_installer-11.6.0.4-at4bpm_web.tar.gz
+	* mdm_installer-11.6.0.4-mdph_web.tar.gz
 	
-- [ ] Download and copy IBM Data Server Driver Package (DS driver) to the "db2" folder
+- [ ] Download and copy IBM Data Server Driver Package (DS driver) to the ```db2``` folder
 
 	* v10.5fp9_linuxx64_client.tar.gz
 
 - [ ] Download and copy IBM Installation Manager file to the ```im``` folder
 
 	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
-
-- [ ] Extract the IBM InfoSphere MDM  installation image files to the "was/install" folder
-
-	* mdm_installer-11.6.0.4-mdmseae_web.tar.gz 
-	* mdm_installer-11.6.0.4-at4bpm_web.tar.gz
-	* mdm_installer-11.6.0.4-mdph_web.tar.gz
 
 - [ ] Build Master Data Management image
 	
