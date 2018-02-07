@@ -73,7 +73,7 @@ USER was
 RUN mkdir -p /tmp/mdm/
 
 RUN echo "\033[1;34mUpdate wsadmin password\033[0m"
-COPY --chown=was mdm/reset_password.sh /tmp/mdm/
+COPY --chown=was:was mdm/reset_password.sh /tmp/mdm/
 RUN /tmp/mdm/reset_password.sh
 
 #RUN echo "\033[1;34mStart the server\033[0m"
@@ -83,7 +83,7 @@ RUN /tmp/mdm/reset_password.sh
 
 RUN echo "\033[1;34mInstall IBM Installation Manager\033[0m"
 
-COPY --chown=was im/agent.installer.linux.gtk.x86_64_*.zip /tmp/
+COPY --chown=was:was im/agent.installer.linux.gtk.x86_64_*.zip /tmp/
 RUN unzip -qd /tmp/im /tmp/agent.installer.linux.gtk.x86_64_*.zip \
   && /tmp/im/installc -acceptLicense -accessRights nonAdmin \
     -installationDirectory "/home/was/IBM/InstallationManager"  \
@@ -95,33 +95,39 @@ ENV PATH /home/was/IBM/InstallationManager/eclipse/tools:$PATH
 RUN echo "\033[1;34mAdding offerings to IBM Installation Manager\033[0m"
 
 # InfoSphere MDM Standard Edition or Advanced Edition 11.6.0.4
-COPY --chown=was mdm/mdm_installer-11.6.0.4-mdmseae_web.tar.gz /tmp/
+COPY --chown=was:was mdm/mdm_installer-11.6.0.4-mdmseae_web.tar.gz /tmp/
 RUN mkdir -p /tmp/mdm/mdmseae \
 	&& tar xzf /tmp/mdm_installer-11.6.0.4-mdmseae_web.tar.gz -C /tmp/mdm/mdmseae \
 	&& rm /tmp/mdm_installer-11.6.0.4-mdmseae_web.tar.gz
 	
 # Application Toolkit 11.6.0.4
-COPY --chown=was mdm/mdm_installer-11.6.0.4-at4bpm_web.tar.gz /tmp/
+COPY --chown=was:was mdm/mdm_installer-11.6.0.4-at4bpm_web.tar.gz /tmp/
 RUN mkdir -p /tmp/mdm/at4bpm \
 	&& tar xzf /tmp/mdm_installer-11.6.0.4-at4bpm_web.tar.gz -C /tmp/mdm/at4bpm \
 	&& rm /tmp/mdm_installer-11.6.0.4-at4bpm_web.tar.gz
 
 # Data Stewardship and Governance 11.6.0.4
-COPY --chown=was mdm/mdm_installer-11.6.0.4-mdph_web.tar.gz /tmp/
-RUN mkdir -p /tmp/mdm/mdph \
-	&& tar xzf /tmp/mdm_installer-11.6.0.4-mdph_web.tar.gz -C /tmp/mdm/mdph \
-	&& rm /tmp/mdm_installer-11.6.0.4-mdph_web.tar.gz
+#COPY --chown=was:was mdm/mdm_installer-11.6.0.4-mdph_web.tar.gz /tmp/
+#RUN mkdir -p /tmp/mdm/mdph \
+#	&& tar xzf /tmp/mdm_installer-11.6.0.4-mdph_web.tar.gz -C /tmp/mdm/mdph \
+#	&& rm /tmp/mdm_installer-11.6.0.4-mdph_web.tar.gz
 
 ########## IBM MDM AE ######################################################
 
 RUN echo "\033[1;34mInstall InfoSphere MDM using silent mode\033[0m"
-COPY --chown=was mdm/install_mdm.rsp /tmp/mdm/
-RUN imcl input /tmp/mdm/install_mdm.rsp -log /tmp/mdm/install_mdm.rsp -acceptLicense
+COPY --chown=was:was mdm/install_mdm.rsp /tmp/mdm/
+#RUN imcl input /tmp/mdm/install_mdm.rsp -log /tmp/mdm/install_mdm.rsp -acceptLicense
 
 RUN echo "\033[1;34mComplete the configuration\033[0m"
-COPY --chown=was mdm/conf_mdm.properties /tmp/mdm/
-WORKDIR /opt/IBM/MDM/mds/scripts/
-RUN ./madconfig.sh -propertyfile /tmp/mdm/conf_mdm.properties Configure_MasterDataManagement
+COPY --chown=was:was mdm/conf_mdm.properties /tmp/mdm/
+#WORKDIR /opt/IBM/MDM/mds/scripts/
+#RUN ./madconfig.sh -propertyfile /tmp/mdm/conf_mdm.properties Configure_MasterDataManagement
+
+#RUN rm -rf /tmp/mdm/
+
+WORKDIR /home/was/
+COPY --chown=was:was mdm/startApplication.py /work/
+COPY --chown=was:was mdm/stopApplication.py /work/
 
 #CMD ["/work/create_and_start"]
 ## /work/create_profile

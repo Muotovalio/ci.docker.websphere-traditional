@@ -4,6 +4,8 @@
 
 IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to work together to provide a comprehensive set of MDM capabilities.
 
+Use this image for an installation of InfoSphere MDM.
+
 ## Supported tags
 
 11.6.0.4
@@ -11,7 +13,6 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 ## How to use this image
 
 ### Build
-
 
 - [ ] Download the installation image files from IBM Passport Advantage / Software Download
 
@@ -27,41 +28,41 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 	* mdm_installer-11.6.0.4-at4bpm_web.tar.gz
 	* mdm_installer-11.6.0.4-mdph_web.tar.gz
 	
-- [ ] Download and copy IBM Data Server Driver Package (DS driver) to the ```db2``` folder
+- [ ] Download IBM Data Server Driver Package from IBM Fix Central and place the file in the ```db2``` folder
 
 	* v10.5fp9_linuxx64_client.tar.gz
 
-- [ ] Download and copy IBM Installation Manager file to the ```im``` folder
+- [ ] Download IBM Installation Manager from IBM Fix Central and place the file in the ```im``` folder
 
 	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
 
 - [ ] Build Master Data Management image
 	
 	```
-	docker build -t mdm-was:11.6.0.4 .
+	docker build -t mdm-ae:11.6.0.4 .
 	```
 
 	You can ignore the following warnings:
 	* debconf: delaying package configuration, since apt-utils is not installed
 	* DBT3514W  The db2prereqcheck utility failed to find the following 32-bit library file: "libstdc++.so.6". 
 
-### Start WAS in a new container
+### Start MDM AE in a new container
 
 ```
-docker run --name mdm-was --hostname 172.17.0.3 -d -p 9043:9043 -p 9443:9443 mdm-was:11.6.0.4
+docker run --name mdm-ae --hostname mdmae -d -p 9043:9043 -p 9443:9443 mdm-ae:11.6.0.4
 ```
 
-docker run --name mdm-was --hostname 172.17.0.1 --rm -d -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-was:11.6.0.4 tail -f /dev/null
+docker run --name mdm-ae --hostname mdmae --link=mdm-db -d -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdmae:11.6.0.4 tail -f /dev/null
 
-docker run --name mdm-was --hostname 172.17.0.1 --rm -it -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-was:11.6.0.4 bash
+docker run --name mdm-ae --hostname mdmae --link=mdm-db --rm -it -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdmae:11.6.0.4 bash
 
-docker exec mdm-was cat /tmp/PASSWORD
+docker exec mdmae cat /tmp/PASSWORD
 
 
 ### Open a bash shell in the running container
 
 ```
-docker exec -it mdm-was bash
+docker exec -it mdmae bash
 ```
 
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
@@ -78,8 +79,8 @@ https://localhost:9043/ibm/console/login.do?action=secure
 
 You can start and stop applications using wsadmin tool and scripting 
 ```
-/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user <wsadmin -password wsadminpwd -f /share/install/startApplication.py <name>
-/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user wsadmin -password wsadminpwd -f /share/install/stopApplication.py <name>
+/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user <wsadmin -password wsadminpwd -f /work/startApplication.py <name>
+/opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -user wsadmin -password wsadminpwd -f /work/stopApplication.py <name>
 ```
 
 where &lt;name&gt; is:
@@ -111,8 +112,8 @@ Installation Manager is installed in /home/was/IBM/InstallationManager/eclipse d
 
 
 * xhost + 9.183.71.231
-* docker exec -e DISPLAY=9.183.71.231:0 -it mdm-was bash
-/home/was/IBM/InstallationManager/eclipse/IBMIM -record /share/was/install/install_mdm_new.rsp -input /share/was/install/install_mdm.rsp
+* docker exec -e DISPLAY=9.183.71.231:0 -it mdmae bash
+* /home/was/IBM/InstallationManager/eclipse/IBMIM -record /share/mdm/install_mdm_new.rsp -input /share/mdm/install_mdm.rsp
 
 root@31229fbbde71:/host/install/mdm_installer-11.6.0.4-at4bpm_web# /opt/IBM/InstallationManager/eclipse/tools/imcl 
 -repositories /host/install/mdm_installer-11.6.0.4-at4bpm_web/repository.config 
@@ -139,17 +140,17 @@ imcl install
 
 * Use the WAS Administrative Console to create a DB2_JDBC_DRIVER_PATH WebSphere Application Server environment variable, pointing to the DB2 instance home on the local machine and targeting the node level.
   https://www.ibm.com/support/knowledgecenter/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/Topics/t_preparingyourdb2databasesonseparateserver.html
-
 * Clean up dockerfile / utilities / directories
-
 * Fixpack
+* Additional Samples and Assets for IBM InfoSphere Master Data Management V11.6.0.4 Multilingual (CNPC2EN ) 
+* hostname / ip address
+* MQ
+* multi-step build / link containers https://stackoverflow.com/questions/26551279/how-to-link-docker-containers-on-build
 
+## License
 
+The Dockerfile and associated scripts are licensed under the Apache License 2.0. 
 
+## References
 
-Installing IBM InfoSphere Master Data Management Standard and Advanced Editions
-
-	https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/Topics/installing_std_adv_editions.html
-
-
-   
+1. IBM InfoSphere Master Data Management V11.6 documentation (https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.mdmhs.homepage.doc/mdm11.6_welcome.html)
