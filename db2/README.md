@@ -19,7 +19,7 @@ It is easy to install, embed, deploy, and available for download, deployment, an
 
 ### Build
 
-- [ ] Copy database scripts to the ddl folder
+- [ ] Copy database scripts to the ```ddl``` folder
 
 	The scripts to create IBM DB2 databases and table spaces are located in STARTUPKIT_INSTALL_HOME/CoreData/Full/DB2/Standard/ddl/
 	* CreateDB.sql
@@ -27,9 +27,9 @@ It is easy to install, embed, deploy, and available for download, deployment, an
 
 - [ ] Build an image from a Dockerfile
 
-	```
-	docker build -t mdm-db2:11.6.0.4 .
-	```
+```
+docker build -t mdm-db2:11.6.0.4 .
+```
 
 ### Start DB2 in a new container
 
