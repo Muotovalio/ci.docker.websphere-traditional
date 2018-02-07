@@ -55,7 +55,6 @@ RUN echo "\033[1;34mInstall IBM Data Server Client\033[0m"
 
 COPY db2/v10.5fp9_linuxx64_client.tar.gz /tmp/db2/
 COPY db2/db2client.rsp /tmp/db2/
-
 RUN tar xfz /tmp/db2/v10.5fp9_linuxx64_client.tar.gz -C /tmp/db2/ \
 	&& /tmp/db2/client/db2setup -r /tmp/db2/db2client.rsp \
 	&& rm -rf /tmp/db2
@@ -63,6 +62,7 @@ RUN tar xfz /tmp/db2/v10.5fp9_linuxx64_client.tar.gz -C /tmp/db2/ \
 RUN echo "\033[1;34mCatalog remote database\033[0m"
 
 USER db2inst1
+
 RUN /bin/bash -c 'source $HOME/.bashrc; /home/db2inst1/sqllib/bin/db2 catalog tcpip node ${DB2_NODE} remote ${DB2_SERVER} server ${DB2_PORT}'
 RUN /bin/bash -c 'source $HOME/.bashrc; /home/db2inst1/sqllib/bin/db2 catalog db ${DB2_DBNAME} at node ${DB2_NODE} authentication server'
 
@@ -73,11 +73,9 @@ USER was
 RUN mkdir -p /tmp/mdm/
 
 RUN echo "\033[1;34mUpdate wsadmin password\033[0m"
+
 COPY --chown=was:was mdm/reset_password.sh /tmp/mdm/
 RUN /tmp/mdm/reset_password.sh
-
-#RUN echo "\033[1;34mStart the server\033[0m"
-#RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
 
 ########## IBM Installation Manager ########################################
 
@@ -116,21 +114,29 @@ RUN mkdir -p /tmp/mdm/at4bpm \
 
 RUN echo "\033[1;34mInstall InfoSphere MDM using silent mode\033[0m"
 COPY --chown=was:was mdm/install_mdm.rsp /tmp/mdm/
-#RUN imcl input /tmp/mdm/install_mdm.rsp -log /tmp/mdm/install_mdm.rsp -acceptLicense
+RUN imcl input /tmp/mdm/install_mdm.rsp -log /tmp/mdm/install_mdm.rsp -acceptLicense
 
 RUN echo "\033[1;34mComplete the configuration\033[0m"
 COPY --chown=was:was mdm/conf_mdm.properties /tmp/mdm/
-#WORKDIR /opt/IBM/MDM/mds/scripts/
-#RUN ./madconfig.sh -propertyfile /tmp/mdm/conf_mdm.properties Configure_MasterDataManagement
+WORKDIR /opt/IBM/MDM/mds/scripts/
+RUN ./madconfig.sh -propertyfile /tmp/mdm/conf_mdm.properties Configure_MasterDataManagement
 
-#RUN rm -rf /tmp/mdm/
-
-WORKDIR /home/was/
 COPY --chown=was:was mdm/startApplication.py /work/
 COPY --chown=was:was mdm/stopApplication.py /work/
+
+########## Clean up ########################################################
+
+RUN rm -rf /tmp/mdm/
+#RUN rm -rf /home/was/IBM/
+
+WORKDIR /home/was/
 
 #CMD ["/work/create_and_start"]
 ## /work/create_profile
 ## exec /work/start_server
 #RUN echo "\033[1;34mStart the server and print log\033[0m"
 #CMD ["/work/start_server"]
+
+#RUN echo "\033[1;34mStart the server\033[0m"
+#RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
+
