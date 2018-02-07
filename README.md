@@ -8,3 +8,5 @@ Under this directory you can find build scripts for Docker images (Dockerfiles) 
 * IBM Master Data Management
 * Stewardship Center
 * Workbench
+
+![alt text](aod.001.png,"architecture overview")
