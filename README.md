@@ -10,3 +10,8 @@ Under this directory you can find build scripts for Docker images (Dockerfiles) 
 * Workbench
 
 ![alt text](aod.001.png,"architecture overview")
+
+
+![architecture overview](aod.001.png?raw=true)
+
+![architecture overview](https://github.com/Muotovalio/mdm-docker/blob/master/aod.001.png?raw=true)
