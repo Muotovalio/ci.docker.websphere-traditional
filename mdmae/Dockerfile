@@ -5,10 +5,15 @@ ARG DB2_NODE=DBEXPC
 ARG DB2_SERVER=172.17.0.2
 ARG DB2_PORT=50000
 ARG DB2_DBNAME=MDMDB
-
-########## Utilities and required packages #################################
+ARG WASUSER=was
+ARG WASPASSWORD=waspwd
 
 USER root
+
+# Reset was password
+RUN echo ${WASUSER}:${WASPASSWORD} | chpasswd
+
+########## Utilities and required packages #################################
 
 RUN echo "\033[1;34mAdd 32-bit architecture\033[0m"
 
@@ -110,7 +115,9 @@ COPY --chown=was:was mdm/stopApplication.py /work/
 
 ########## Clean up ########################################################
 
+# Installation files
 RUN rm -rf /tmp/mdm/
+# IBM Installation Manager
 #RUN rm -rf /home/was/IBM/
 
 WORKDIR /home/was/
