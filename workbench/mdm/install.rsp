@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<agent-input>
+  <variables>
+    <variable name='sharedLocation' value='/opt/IBM/IBMIMShared'/>
+  </variables>
+  <server>
+    <repository location='/tmp/rad/RAD_SETUP'/>
+    <repository location='/tmp/rad/Activation_Kit/RAD95_Lic.jar'/>
+    <repository location='/tmp/mdm'/>
+  </server>
+  <profile id='IBM Software Delivery Platform' installLocation='/opt/IBM/SDP'>
+    <data key='cic.selector.os' value='linux'/>
+    <data key='cic.selector.arch' value='x86_64'/>
+  </profile>
+  <install>
+    <!-- IBM® Rational® Application Developer for WebSphere® Software 9.5 -->
+    <offering profile='IBM Software Delivery Platform' id='com.ibm.rational.application.developer.v95' version='9.5.0.RADO95-I20150908_2025' features='com.ibm.rad.sdpcore,com.ibm.rad.jre,com.ibm.rad.product,com.ibm.rad.webtools.basic,com.ibm.rad.webtools.dojolib,com.ibm.rad.webtools.jee.basic,com.ibm.rad.jee5,com.ibm.rad.sip,com.ibm.rad.aries,com.ibm.rad.code_review,com.ibm.rad.llcc,com.ibm.rad.tptp,com.ibm.rad.liberty,com.ibm.rad.was85_devtools,com.ibm.rad.egit,com.ibm.rad.maven'/>
+    <!-- IBM InfoSphere Master Data Management Workbench 11.6.0.4 -->
+    <offering profile='IBM Software Delivery Platform' id='com.ibm.im.mdm.workbench' version='11.6.0.201711291918' features='workbench.eclipse.feature,workbench.server_bundles'/>
+  </install>
+  <install>
+    <!-- com.ibm.rational.application.developer.v95.pek.offering 9.0.1.20150203_1357 -->
+    <offering profile='IBM Software Delivery Platform' id='com.ibm.rational.application.developer.v95.pek.offering' version='9.0.1.20150203_1357' features='main.feature'/>
+  </install>
+  <preference name='com.ibm.cic.common.core.preferences.eclipseCache' value='${sharedLocation}'/>
+</agent-input>

@@ -38,7 +38,6 @@
     <data key='user.default.messaging.flag,com.ibm.mdm.advanced.0.4' value='true'/>
     <data key='user.messaging.channel,com.ibm.mdm.advanced.0.4' value='MDM.SRV.CH'/>
     <data key='user.instance.identifier' value='E001'/>
-    <!-- Business Administration -->
     <data key='user.skip.enter.ba.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.type.ba,com.ibm.mdm.advanced.0.4' value='Base'/>
     <data key='user.deploy.host.ba,com.ibm.mdm.advanced.0.4' value='localhost'/>
@@ -49,12 +48,11 @@
     <data key='user.was.cell.ba,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
     <data key='user.was.server.ba,com.ibm.mdm.advanced.0.4' value='server1'/>
     <data key='user.was.profile.home.ba,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
-    <data key='user.was.new.server.check.ba,com.ibm.mdm.advanced.0.4' value='false'/>    
+    <data key='user.was.new.server.check.ba,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.user.ba,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
     <data key='user.was.password.ba,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
     <data key='user.was.home.ba,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
     <data key='user.was.security.ba,com.ibm.mdm.advanced.0.4' value='1'/>
-    <!--Inspector -->
     <data key='user.skip.enter.inspector.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.type.inspector,com.ibm.mdm.advanced.0.4' value='Base'/>
     <data key='user.deploy.host.inspector,com.ibm.mdm.advanced.0.4' value='localhost'/>
@@ -71,7 +69,6 @@
     <data key='user.was.home.inspector,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
     <data key='user.was.security.inspector,com.ibm.mdm.advanced.0.4' value='1'/>
     <data key='user.use.ssl.inspector,com.ibm.mdm.advanced.0.4' value='false'/>
-    <!-- Enterprise Viewer -->
     <data key='user.skip.enter.ev.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.type.ev,com.ibm.mdm.advanced.0.4' value='Base'/>
     <data key='user.deploy.host.ev,com.ibm.mdm.advanced.0.4' value='localhost'/>
@@ -88,17 +85,16 @@
     <data key='user.was.home.ev,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer'/>
     <data key='user.was.security.ev,com.ibm.mdm.advanced.0.4' value='1'/>
     <data key='user.use.ssl.ev,com.ibm.mdm.advanced.0.4' value='false'/>
-	<!-- Web Reports -->
     <data key='user.skip.enter.wb.input.data,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.type.wb,com.ibm.mdm.advanced.0.4' value='Base'/>
-    <data key='user.deploy.host.wb,com.ibm.mdm.advanced.0.4' value='localhost'/>   
+    <data key='user.deploy.host.wb,com.ibm.mdm.advanced.0.4' value='localhost'/>
     <data key='user.deploy.port.wb,com.ibm.mdm.advanced.0.4' value='8880'/>
     <data key='user.was.cluster.wb,com.ibm.mdm.advanced.0.4' value='None'/>
     <data key='user.was.cluster.flag.wb,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.node.wb,com.ibm.mdm.advanced.0.4' value='DefaultNode01'/>
     <data key='user.was.cell.wb,com.ibm.mdm.advanced.0.4' value='DefaultCell01'/>
     <data key='user.was.server.wb,com.ibm.mdm.advanced.0.4' value='server1'/>
-    <data key='user.was.profile.home.wb,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>    
+    <data key='user.was.profile.home.wb,com.ibm.mdm.advanced.0.4' value='/opt/IBM/WebSphere/AppServer/profiles/AppSrv01'/>
     <data key='user.was.new.server.check.wr,com.ibm.mdm.advanced.0.4' value='false'/>
     <data key='user.was.user.wb,com.ibm.mdm.advanced.0.4' value='wsadmin'/>
     <data key='user.was.password.wb,com.ibm.mdm.advanced.0.4' value='wsadminpwd'/>
