@@ -19,35 +19,68 @@ Use this image to set up an IBM MDM workbench for development.
 
 ### Build
 
-Prerequisites
-* Rational Application Developer for WebSphere Software 9.5
+- [ ] Download Rational Application Developer from the SSW Software Downloads site / Passport Advantage and place the files in the ```rad``` folder
 
-* Quick Start Guide for IBM Rational Application Developer for WebSphere Software Multilingual - READ ME FIRST (CIY03ML ) 
-* IBM Rational Application Developer for WebSphere Software V9.5 MASTER Multilingual Multiplatform Set up (CN6N2ML )
-* IBM Rational Application Developer for WebSphere Software V9.5 Multilingual Multiplatform Core Part 1 (CN6N3ML ) 
-* IBM Rational Application Developer for WebSphere Software V9.5 Multilingual Multiplatform Core Part 2 (CN6N4ML ) 
-* IBM Rational Application Developer for WebSphere Software V9.5 Activation Kit Multiplatform Multilingual (CN6N6ML ) 
-* Rational License Key Notification V2.0 Multilingual (CZ7E5ML )
+	* IBM Rational Application Developer for WebSphere Software V9.5 MASTER Multilingual Multiplatform Set up (CN6N2ML )
+	* IBM Rational Application Developer for WebSphere Software V9.5 Multilingual Multiplatform Core Part 1 (CN6N3ML ) 
+	* IBM Rational Application Developer for WebSphere Software V9.5 Multilingual Multiplatform Core Part 2 (CN6N4ML ) 
+	* IBM Rational Application Developer for WebSphere Software V9.5 Activation Kit Multiplatform Multilingual (CN6N6ML ) 
+
+- [ ] Download Master Data Management Workbench from the SSW Software Downloads site / Passport Advantage and place the files in the ```mdm``` folder
+
+	* IBM InfoSphere Master Data Management Workbench Standard & Advanced Edition Mulitplatform Multilingual V11.6.0.4 (CNPC0EN )
+
+- [ ] Build the Workbench Docker image
 
 ```
 docker build -t mdm-workbench:11.6.0.4 .
 ```
 
-./IBM/InstallationManager/eclipse/IBMIM  -record /share/install_workbench.rsp -input /share/install_workbench.rsp
+<!--
+Use the IBM Installation Manager to record a response file to be used in silent mode:
+/opt/IBM/InstallationManager/eclipse/IBMIM  -record /share/install_workbench_new.rsp -input /share/install_workbench.rsp
+-->
 
 ### Start workbench in a new container
 
-xhost + 9.183.71.231
+- [ ] Install X11 (XQuartz for Mac)
+
+- [ ] Allow your local host to make connections to the  X server
 
 ```
-docker run --name mdm-workbench --hostname mdmworkbench --rm -it -v $(pwd):/share mdm-workbench:11.6.0.4 bash
+ifconfig
+xhost +<ipaddress>
 ```
+
+- [ ] Run the container
+
+```
+docker run --name mdm-workbench --hostname mdmworkbench -e DISPLAY=9.183.71.231:0 -d mdm-workbench:11.6.0.4 /opt/IBM/SDP/eclipse
+```
+<!--
+docker run --name mdm-workbench --hostname mdmworkbench --rm -it -e DISPLAY=9.183.71.231:0 -v $(pwd):/share mdm-workbench:11.6.0.4 bash
 
 ```
 docker exec -it -e DISPLAY=9.183.71.231:0 mdm-workbench bash
 ```
 
 docker run --name mdm-workbench --hostname mdmworkbench-it -e DISPLAY=9.183.71.231:0 -v $(pwd):/share mdm-workbench:11.6.0.4 bash
+
+/opt/IBM/SDP/eclipse 
+-->
+
+- [ ] Configuring the remote server connection https://www.ibm.com/support/knowledgecenter/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/scenarios/installscenario4b.html?view=kc
+
+- [ ] Configuring the remote database connection https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/scenarios/installscenario4c.html
+
+- [ ] Setting Workbench server definitions https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.6.0/com.ibm.swg.im.mdmhs.release.install.doc/Topics/setting_workbench_server_definitions.html
+
+- [ ] Restart exited container
+
+```
+docker start -a -i `docker ps -q -l`
+```
+
 
 ## License
 

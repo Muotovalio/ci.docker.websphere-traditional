@@ -10,7 +10,7 @@ Use this program to install IBM packages on Docker images.
 
 - [ ] Download IBM Installation Manager from the IBM Fix Central http://www-01.ibm.com/support/docview.wss?uid=swg24044395
 
-- [ ] Copy the file in this folder
+- [ ] Extract the installation image files to this folder
 
 	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
 

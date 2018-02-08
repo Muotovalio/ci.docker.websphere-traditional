@@ -11,3 +11,11 @@ Under this directory you can find build scripts for Docker images (Dockerfiles) 
 * IBM Master Data Management
 * Stewardship Center
 * Workbench
+
+
+## TODO
+
+- [ ] Install IBM InfoSphere Master Data Management Additional Assets and Samples V11.6.0.4 Multiplatform Multilingual eAssembly (CJ328ML)
+- [ ] Install IBM MQ 9.0.0 (currently using WebSphere Service Integration Bus
+
+- CWPKI0022E: SSL HANDSHAKE FAILURE:  A signer with SubjectDN "CN=localhost, OU=DefaultCell01, OU=DefaultNode01, O=IBM, C=US" was sent from target host:port "172.17.0.3:8880". 

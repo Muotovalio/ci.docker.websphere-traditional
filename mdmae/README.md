@@ -14,7 +14,7 @@ Use this image for an installation of InfoSphere MDM.
 
 ### Build
 
-- [ ] Download the installation image files from IBM Passport Advantage / Software Download
+- [ ] Download Master Data Management from the SSW Software Downloads site / Passport Advantage
 
 	* IBM InfoSphere Master Data Management Standard and Advanced Edition Mulitplatform Multilingual V11.6.0.4 Part 1 (CNPB8EN )
 	* IBM InfoSphere Master Data Management Standard & Advanced Edition Mulitplatform Multilingual V11.6.0.4 Part 2 (CNPB9EN )
@@ -36,11 +36,11 @@ Use this image for an installation of InfoSphere MDM.
 
 	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
 
-- [ ] Build Master Data Management image
+- [ ] Build the Master Data Management Docker image
 	
-	```
-	docker build -t mdm-ae:11.6.0.4 .
-	```
+```
+docker build -t mdm-ae:11.6.0.4 .
+```
 
 	You can ignore the following warnings:
 	* debconf: delaying package configuration, since apt-utils is not installed
