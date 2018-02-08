@@ -1,21 +1,5 @@
-############################################################################
-# (C) Copyright IBM Corporation 2015.                                      #
-#                                                                          #
-# Licensed under the Apache License, Version 2.0 (the "License");          #
-# you may not use this file except in compliance with the License.         #
-# You may obtain a copy of the License at                                  #
-#                                                                          #
-#      http://www.apache.org/licenses/LICENSE-2.0                          #
-#                                                                          #
-# Unless required by applicable law or agreed to in writing, software      #
-# distributed under the License is distributed on an "AS IS" BASIS,        #
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. #
-# See the License for the specific language governing permissions and      #
-# limitations under the License.                                           #
-#                                                                          #
-############################################################################
-
-FROM ibmcom/websphere-traditional:profile
+FROM ibmcom/websphere-traditional:8.5.5.9-profile
+#FROM ibmcom/websphere-traditional:profile
 
 ARG DB2_NODE=DBEXPC
 ARG DB2_SERVER=172.17.0.2
@@ -113,13 +97,13 @@ RUN mkdir -p /tmp/mdm/at4bpm \
 ########## IBM MDM AE ######################################################
 
 RUN echo "\033[1;34mInstall InfoSphere MDM using silent mode\033[0m"
-COPY --chown=was:was mdm/install_mdm.rsp /tmp/mdm/
-RUN imcl input /tmp/mdm/install_mdm.rsp -log /tmp/mdm/install_mdm.rsp -acceptLicense
+COPY --chown=was:was mdm/install.rsp /tmp/mdm/
+RUN imcl input /tmp/mdm/install.rsp -log /tmp/mdm/install.log -acceptLicense
 
 RUN echo "\033[1;34mComplete the configuration\033[0m"
-COPY --chown=was:was mdm/conf_mdm.properties /tmp/mdm/
+COPY --chown=was:was mdm/madconfig.properties /tmp/mdm/
 WORKDIR /opt/IBM/MDM/mds/scripts/
-RUN ./madconfig.sh -propertyfile /tmp/mdm/conf_mdm.properties Configure_MasterDataManagement
+RUN ./madconfig.sh -propertyfile /tmp/mdm/madconfig.properties Configure_MasterDataManagement
 
 COPY --chown=was:was mdm/startApplication.py /work/
 COPY --chown=was:was mdm/stopApplication.py /work/
