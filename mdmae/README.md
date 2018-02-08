@@ -51,25 +51,23 @@ Use this image for an installation of InfoSphere MDM.
 ```
 docker run --name mdm-ae --hostname mdmae -d -p 9043:9043 -p 9443:9443 mdm-ae:11.6.0.4
 ```
-
-docker run --name mdm-ae --hostname mdmae --link=mdm-db -d -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdmae:11.6.0.4 tail -f /dev/null
-
-docker run --name mdm-ae --hostname mdmae --link=mdm-db --rm -it -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdmae:11.6.0.4 bash
-
+<!--
+docker run --name mdm-ae --hostname mdmae -d -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ae:11.6.0.4 
+docker run --name mdm-ae --hostname mdmae -e DISPLAY=9.183.71.231:0 --rm -it -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ae:11.6.0.4 bash
+--link=mdm-db
 docker exec mdmae cat /tmp/PASSWORD
-
+-->
 
 ### Open a bash shell in the running container
 
 ```
 docker exec -it mdmae bash
 ```
-
+<!--
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1
-
 /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/stopServer.sh server1 -username wsadmin -password wsadminpwd
-
 /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -lang jython -conntype NONE -f /work/updatePassword.py wsadmin wsadminpwd > /dev/null 2>&1
+-->
 
 ### WAS Administrative Console
 
@@ -105,36 +103,15 @@ https://localhost:9443/accessweb/empi/MITLogin.jsp
 ### Web Reports
 https://localhost:9443/webreports/common/login.html
 
-
+<!--
 ## IBM Installation Manager
 
 Installation Manager is installed in /home/was/IBM/InstallationManager/eclipse directory
 
-
 * xhost + 9.183.71.231
-* docker exec -e DISPLAY=9.183.71.231:0 -it mdmae bash
-* /home/was/IBM/InstallationManager/eclipse/IBMIM -record /share/mdm/install_mdm_new.rsp -input /share/mdm/install_mdm.rsp
-
-root@31229fbbde71:/host/install/mdm_installer-11.6.0.4-at4bpm_web# /opt/IBM/InstallationManager/eclipse/tools/imcl 
--repositories /host/install/mdm_installer-11.6.0.4-at4bpm_web/repository.config 
--installationDirectory /opt/IBM/MDM install com.ibm.mdm.at4bpm.0.4_11.6.0.FP04IF000_20171205-0358
-
-Shared Resources Directory: /opt/IBM/IMShared
-
-imcl install 
-        -repositories /tmp/mdm/... 
-        -acceptLicense 
-        -installationDirectory /opt/IBM/...
-        
-        
-/opt/IBM/InstallationManager/eclipse/tools/imcl -showProgress \
-    -acceptLicense install $packages \
-    -repositories $repo \
-    -installationDirectory $INSTALL_DIR \
-    -secureStorageFile $SECURE_STORAGE_FILE \
-    -preferences com.ibm.cic.common.core.preferences.preserveDownloadedArtifacts=false \
-    $properties
-    
+* docker exec -e DISPLAY=9.183.71.231:0 -it mdm-ae bash
+* /home/was/IBM/InstallationManager/eclipse/IBMIM -record /share/mdmae/mdm/install_new.rsp -input /share/mdmae/mdm/install.rsp
+-->
 
 ### TODO
 
@@ -143,9 +120,11 @@ imcl install
 * Clean up dockerfile / utilities / directories
 * Fixpack
 * Additional Samples and Assets for IBM InfoSphere Master Data Management V11.6.0.4 Multilingual (CNPC2EN ) 
-* hostname / ip address
-* MQ
+* MQ / SIBus
 * multi-step build / link containers https://stackoverflow.com/questions/26551279/how-to-link-docker-containers-on-build
+* hostname / ip address
+* FROM 8.5.5.12-profile https://www-01.ibm.com/support/docview.wss?uid=swg22009597
+* FROM 8.5.5.9-profile
 
 ## License
 
