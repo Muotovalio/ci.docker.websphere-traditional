@@ -34,12 +34,13 @@ RUN dpkg --add-architecture i386
 
 RUN echo "\033[1;34mInstall utilities and required packages\033[0m"
 
-#RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
 RUN apt-get update && apt-get install -y unzip
 RUN apt-get update && apt-get install -y build-essential
 RUN apt-get update && apt-get install -y perl-doc
 RUN apt-get update && apt-get install -y libpam0g:i386
 RUN apt-get update && apt-get install -y language-pack-en-base  
+
+RUN apt-get update && apt-get install -y vim
 
 RUN echo "\033[1;34mInstall Perl modules\033[0m"
 RUN (echo y;echo o conf prerequisites_policy follow;echo o conf commit)|cpan
@@ -84,8 +85,8 @@ RUN /bin/bash -c 'source $HOME/.bashrc; /home/db2inst1/sqllib/bin/db2 catalog db
 
 USER ${WASUSER} 
 
+ENV PATH /opt/ibm/db2/V10.5/bin:$PATH
 RUN echo ". /home/db2inst1/sqllib/db2profile" >> $HOME/.bashrc
-RUN . /home/db2inst1/sqllib/db2profile
 
 ########## IBM Installation Manager ########################################
 
@@ -128,25 +129,26 @@ RUN /tmp/mdm/reset_password.sh
 RUN echo "\033[1;34mInstall InfoSphere MDM CE using silent mode\033[0m"
 COPY --chown=was:was mdm/install.rsp /tmp/mdm/
 
-#RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
-#	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install.rsp -log /tmp/mdm/install.log -acceptLicense
-
-#RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
-#	&& /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -user wsadmin -password wsadminpwd -lang jython -c "securityoff()" \
-#	&& /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh -user wsadmin -password wsadminpwd -lang jython -c "AdminTask.setGlobalSecurity ('[-enabled false]')" \
-#	&& imcl input /tmp/mdm/install.rsp -log /tmp/mdm/install.log -acceptLicense
-
-# RUN set
-# chmod -R 755 $TOP
-
 # Setting the environment variables
-#RUN echo "export PERL5LIB=/opt/IBM/MDM/bin/perllib" >> $HOME/.bashrc
-#RUN echo "export LANG=en_US" >> $HOME/.bashrc
-#RUN echo "export DB2DIR=/opt/ibm/db2/V10.5" >> $HOME/.bashrc
-#RUN echo "export DB2INSTANCE=db2inst1" >> $HOME/.bashrc
-#RUN echo "export LC_CTYPE=en_US.UTF-8" >> $HOME/.bashrc
-#RUN echo "export LC_ALL=en_US.UTF-8" >> $HOME/.bashrc
+ENV PERL5LIB /opt/IBM/MDM/bin/perllib
+ENV LANG en_US
+ENV LC_CTYPE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
+ENV DB2DIR /opt/ibm/db2/V10.5
+ENV DB2INSTANCE db2inst1
+RUN echo "export PERL5LIB=/opt/IBM/MDM/bin/perllib" >> $HOME/.bashrc
+RUN echo "export LANG=en_US" >> $HOME/.bashrc
+RUN echo "export LC_CTYPE=en_US.UTF-8" >> $HOME/.bashrc
+RUN echo "export LC_ALL=en_US.UTF-8" >> $HOME/.bashrc
+RUN echo "export DB2DIR=/opt/ibm/db2/V10.5" >> $HOME/.bashrc
+RUN echo "export DB2INSTANCE=db2inst1" >> $HOME/.bashrc
 
-# WORKDIR /home/was
+RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
+	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install.rsp -log /tmp/mdm/install.log -acceptLicense
 
-# USER root
+# Start MDM CE and all services
+COPY mdm/start_mdm.sh /work/
+CMD ["/work/start_mdm.sh"]
+
+WORKDIR /home/was/
+
