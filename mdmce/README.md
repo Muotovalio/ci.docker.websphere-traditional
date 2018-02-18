@@ -6,7 +6,7 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 
 ## Supported tags
 
-11.0
+11.6
 
 ## How to use this image
 
@@ -16,11 +16,17 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 
 - [ ] Download Master Data Management Collaboration Edition from the SSW Software Downloads site / Passport Advantage
 
+	* IBM InfoSphere Master Data Management Collaboration Server for Multiplatform V11.6 Multilingual (CNF49ML )
+	<!--
 	* IBM InfoSphere Master Data Management Collaborative Edition V11.0 Multiplatform Multilingual eAssembly (CRMY3ML)
-
+	-->
+	
 - [ ] Place the IBM InfoSphere MDM CE installation image file in the ```mdm``` folder
 
+	* INFOSP_MDM_COLLABORATION_SERVER_F.tar
+	<!--
 	* MDM_COLLAB_ED_V11.0.tar.gz
+	-->
 
 - [ ] Download [IBM Data Server Driver Package](http://www-01.ibm.com/support/docview.wss?uid=swg27016878) from IBM Fix Central and place the file in the ```db2``` folder
 
@@ -33,19 +39,22 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 - [ ] Build the MDM CE Docker image
 
 ```
-docker build -t mdm-ce:11.0 .
+docker build -t mdm-ce:11.6 .
 ```
+<!--
+docker build -t mdm-ce:11.0 .
+-->
 
 ### Start MDM CE in a new container
 
 ```
-docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 mdm-ce:11.0
+docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 mdm-ce:11.6
 ```
 
 <!--
 docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 -p 9043:9043 -p 9443:9443 mdm-ce:11.0
 xhost + 192.168.8.118
-docker run --name mdm-ce --hostname mdmce -e DISPLAY=192.168.8.118:0 --rm -it -p 7507:7507 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.0 bash
+docker run --name mdm-ce --hostname mdmce -e DISPLAY=192.168.8.118:0 --rm -it -p 7507:7507 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.6 bash
 https://localhost:9043/ibm/console/login.do
 -->
 
@@ -65,11 +74,11 @@ You can start and stop Master Data Management Collaboration Server and all servi
 
 Start:
 ```
-/opt/IBM/MDM/bin/go/start_local.sh
+/opt/IBM/MDMCE/bin/go/start_local.sh
 ```
 Stop:
 ```
-/opt/IBM/MDM/bin/go/stop_local.sh
+/opt/IBM/MDMCE/bin/go/stop_local.sh
 ```
 
 ### Logging in to the product

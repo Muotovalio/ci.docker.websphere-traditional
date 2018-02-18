@@ -10,7 +10,7 @@
 start_server()
 {
   echo "Starting server ..................."
-  /opt/IBM/MDM/bin/go/start_local.sh
+  /opt/IBM/MDMCE/bin/go/start_local.sh
 }
 
 start_server || exit $?

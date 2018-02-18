@@ -1,4 +1,5 @@
-FROM ibmcom/websphere-traditional:8.5.5.9-profile
+FROM ibmcom/websphere-traditional:8.5.5.12-profile
+#FROM ibmcom/websphere-traditional:9.0.0.6-profile
 
 ARG DB2_NODE=DBEXPC
 ARG DB2_SERVER=172.17.0.2
@@ -55,12 +56,12 @@ RUN cpan File::Basename
 RUN cpan IO::Handle
 RUN cpan File::Path
 
-
 RUN echo "\033[1;34mInstall packages needed to run X11 / IBMIM\033[0m"
 
 RUN apt-get update && apt-get install -y libgtk2.0-0
-RUN apt-get install -y libxtst6 
-
+RUN apt-get update && apt-get install -y libxtst6 
+RUN apt-get update && apt-get install -y libxft2
+# libxft2:i386
 
 ### TODO Enabling multicast network traffic
 ### https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ins.doc/pim_tsk_enablingmulticast.html?pos=2
@@ -103,12 +104,21 @@ ENV PATH /home/was/IBM/InstallationManager/eclipse/tools:$PATH
 
 RUN echo "\033[1;34mAdding offerings to IBM Installation Manager\033[0m"
 
-COPY --chown=was:was mdm/*gz /tmp/
+COPY --chown=was:was mdm/*tar /tmp/
+#COPY --chown=was:was mdm/*gz /tmp/
+
+# InfoSphere InfoSphere MDM CE 11.6
+RUN mkdir -p /tmp/mdm/mdmce \
+	&& tar xf /tmp/INFOSP_MDM_COLLABORATION_SERVER_F.tar -C /tmp/mdm/mdmce \
+#	&& unzip -qd /tmp/mdm/mdmce/Collaborative_disks/ /tmp/mdm/mdmce/Collaborative_disks/disk1.zip \
+	&& cd /tmp/mdm/mdmce/Collaborative_disks \
+	&& /opt/IBM/WebSphere/AppServer/java/bin/jar -xf disk1.zip \
+	&& rm /tmp/INFOSP_MDM_COLLABORATION_SERVER_F.tar
 
 # InfoSphere InfoSphere MDM CE 11.0.0.0
-RUN mkdir -p /tmp/mdm/mdmce \
-	&& tar xzf /tmp/MDM_COLLAB_ED_V11.0.tar.gz -C /tmp/mdm/mdmce \
-	&& rm /tmp/MDM_COLLAB_ED_V11.0.tar.gz
+#RUN mkdir -p /tmp/mdm/mdmce \
+#	&& tar xzf /tmp/MDM_COLLAB_ED_V11.0.tar.gz -C /tmp/mdm/mdmce \
+#	&& rm /tmp/MDM_COLLAB_ED_V11.0.tar.gz
 
 #RUN mkdir -p /tmp/mdm/StartupKit \
 #	&& tar xzf /tmp/INSTL_STUP_TK_IMDM_V11.0.tar.gz -C /tmp/mdm/StartupKit \
@@ -127,24 +137,29 @@ RUN /tmp/mdm/reset_password.sh
 ########## IBM MDM CE ######################################################
 
 RUN echo "\033[1;34mInstall InfoSphere MDM CE using silent mode\033[0m"
-COPY --chown=was:was mdm/install.rsp /tmp/mdm/
+COPY --chown=was:was mdm/install_mdm_ce_11.0.rsp /tmp/mdm/
+COPY --chown=was:was mdm/install_mdm_ce_11.6.rsp /tmp/mdm/
 
 # Setting the environment variables
-ENV PERL5LIB /opt/IBM/MDM/bin/perllib
+ENV PERL5LIB /opt/IBM/MDMCE/bin/perllib
 ENV LANG en_US
 ENV LC_CTYPE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 ENV DB2DIR /opt/ibm/db2/V10.5
 ENV DB2INSTANCE db2inst1
-RUN echo "export PERL5LIB=/opt/IBM/MDM/bin/perllib" >> $HOME/.bashrc
+RUN echo "export PERL5LIB=/opt/IBM/MDMCE/bin/perllib" >> $HOME/.bashrc
 RUN echo "export LANG=en_US" >> $HOME/.bashrc
 RUN echo "export LC_CTYPE=en_US.UTF-8" >> $HOME/.bashrc
 RUN echo "export LC_ALL=en_US.UTF-8" >> $HOME/.bashrc
 RUN echo "export DB2DIR=/opt/ibm/db2/V10.5" >> $HOME/.bashrc
 RUN echo "export DB2INSTANCE=db2inst1" >> $HOME/.bashrc
 
+## 11.6
 RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
-	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install.rsp -log /tmp/mdm/install.log -acceptLicense
+	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install_mdm_ce_11.6.rsp -log /tmp/mdm/install.log -acceptLicense
+
+# Setting up a test company using a script (username: Admin, password: trinitron, company: test
+RUN /opt/IBM/MDMCE/bin/db/create_cmp.sh --code=test
 
 # Start MDM CE and all services
 COPY mdm/start_mdm.sh /work/
@@ -152,3 +167,4 @@ CMD ["/work/start_mdm.sh"]
 
 WORKDIR /home/was/
 
+USER root
