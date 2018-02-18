@@ -2,12 +2,15 @@ FROM ibmcom/db2express-c:latest
 
 ENV PATH /home/db2inst1/sqllib/adm:/home/db2inst1/sqllib/bin/:$PATH
 
-# Prepare the database scripts in the Installation Startup Kit
-
-ARG DBNAME=MDMDB
-ARG DBUSER=mdmdb1
-ARG DBPASSWORD=mdmdb1pwd
+ARG DBNAME=PIMDB
+ARG CODESET=UTF-8
 ARG TERRITORY=US
+
+ARG DBADMIN=db2inst1
+ARG DBUSERPWD=db2inst1pwd
+ARG DBUSER=pimdb1
+ARG DBUSERPWD=pimdb1pwd
+
 ARG TABLE_MDS4K=TBS4K
 ARG TABLE_SPACE=TBS8K
 ARG TABLE_SPMDS=TBS16K
@@ -16,27 +19,31 @@ ARG LONG_SPACE=LONGSPACE1
 ARG TABLE_SPPMD=EMESPACE1
 ARG TABLE_SPPMI=EMESPACE2
 
-# Create database user
+RUN echo "\033[1;34mPrepare the database scripts\033[0m"
 
-RUN useradd ${DBUSER}; echo ${DBUSER}:${DBPASSWORD} | chpasswd
+COPY ddl/CreatePIMDB.sql /tmp
+RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/CreatePIMDB.sql
+RUN sed -i 's/<CODESET>/'${CODESET}'/g' /tmp/CreatePIMDB.sql
+RUN sed -i 's/<TERRITORY>/'${TERRITORY}'/g' /tmp/CreatePIMDB.sql
+COPY ddl/CreatePIMBP.sql /tmp
+RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/CreatePIMBP.sql
+COPY ddl/CreatePIMTS.sql /tmp
+RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/CreatePIMTS.sql
+COPY ddl/GrantPIMDB.sql /tmp
+RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/GrantPIMDB.sql
+RUN sed -i 's/<DBUSER>/'${DBUSER}'/g' /tmp/GrantPIMDB.sql
 
-COPY ddl/CreateDB.sql /tmp
-RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/CreateDB.sql
-RUN sed -i 's/<TERRITORY>/'${TERRITORY}'/g' /tmp/CreateDB.sql
+RUN echo "\033[1;34mCreate database user at the operating system level\033[0m"
 
-COPY ddl/CreateTS.sql /tmp
-RUN sed -i 's/<DBNAME>/'${DBNAME}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<DBUSER>/'${DBUSER}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<TABLE_MDS4K>/'${TABLE_MDS4K}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<TABLE_SPACE>/'${TABLE_SPACE}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<TABLE_SPMDS>/'${TABLE_SPMDS}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<INDEX_SPACE>/'${INDEX_SPACE}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<LONG_SPACE>/'${LONG_SPACE}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<TABLE_SPPMD>/'${TABLE_SPPMD}'/g' /tmp/CreateTS.sql
-RUN sed -i 's/<TABLE_SPPMI>/'${TABLE_SPPMI}'/g' /tmp/CreateTS.sql
+RUN useradd ${DBUSER}; echo ${DBUSER}:${DBUSERPWD} | chpasswd
 
-# Run the database scripts
-RUN su - db2inst1 -c "db2start; db2 -t -f /tmp/CreateDB.sql; db2 -t -f /tmp/CreateTS.sql" \
+RUN echo "\033[1;34mRun the database scripts\033[0m"
+
+RUN su - db2inst1 -c "db2start; db2 -t -f /tmp/CreatePIMDB.sql" \
+	&& su - db2inst1 -c "db2stop force"	
+RUN su - db2inst1 -c "db2start; db2 -t -f /tmp/CreatePIMBP.sql" \
 	&& su - db2inst1 -c "db2stop force"
-
-# COPY docker-entrypoint.sh /entrypoint-mdm.sh
+RUN su - db2inst1 -c "db2start; db2 -t -f /tmp/CreatePIMTS.sql" \
+	&& su - db2inst1 -c "db2stop force"
+RUN su - db2inst1 -c "db2start; db2 -t -f /tmp/GrantPIMDB.sql" \
+	&& su - db2inst1 -c "db2stop force"
