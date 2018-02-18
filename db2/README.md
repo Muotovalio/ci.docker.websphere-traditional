@@ -31,11 +31,20 @@ It is easy to install, embed, deploy, and available for download, deployment, an
 docker build -t mdm-db2:11.6.0.4 .
 ```
 
+<!--
+/tmp/bpm/IM64/userinstc -acceptLicense input /share/bpmExp_linux_response_nonroot_64bit.xml -log /tmp/silent_install.log
+-->
+
 ### Start DB2 in a new container
 
 ```
-docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1-pwd -e LICENSE=accept mdm-db2:11.6.0.4 db2start
+docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1pwd -e LICENSE=accept mdm-db2:11.6.0.4 db2start
 ```
+
+```
+docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1pwd -e LICENSE=accept mdm-db2:11.0 db2start
+```
+
 
 ### Open a bash shell in the running container
 
