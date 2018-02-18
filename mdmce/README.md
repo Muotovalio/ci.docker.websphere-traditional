@@ -22,7 +22,7 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 
 	* MDM_COLLAB_ED_V11.0.tar.gz
 
-- [ ] Download IBM Data Server Driver Package from IBM Fix Central and place the file in the ```db2``` folder
+- [ ] Download IBM Data Server Driver Package from [IBM Fix Central](http://www-01.ibm.com/support/docview.wss?uid=swg27016878) and place the file in the ```db2``` folder
 
 	* v10.5fp9_linuxx64_client.tar.gz
 
@@ -63,8 +63,12 @@ https://localhost:9043/ibm/console/login.do?action=secure
 
 You can start and stop Master Data Management Collaboration Server and all services using the scripts. By default, the container stops when MDM CE (main process inside the container) is stopped.
 
+Start:
 ```
 /opt/IBM/MDM/bin/go/start_local.sh
+```
+Stop:
+```
 /opt/IBM/MDM/bin/go/stop_local.sh
 ```
 
@@ -83,10 +87,10 @@ You can start and stop Master Data Management Collaboration Server and all servi
 ## References
 
 1. IBM InfoSphere Master Data Management, Version 11 documentation
-	https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ovr.doc/pim_ref_overview.html?pos=2
+   https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ovr.doc/pim_ref_overview.html?pos=2
 
 2. InfoSphere MDM Collaboration Server Installation Guide
-	https://www.ibm.com/support/knowledgecenter/SSWSR9_11.0.0/com.ibm.pim.ins.doc/Install.pdf?view=kc
+   https://www.ibm.com/support/knowledgecenter/SSWSR9_11.0.0/com.ibm.pim.ins.doc/Install.pdf?view=kc
 
 3. System requirements for InfoSphere Master Data Management
-	http://www-01.ibm.com/support/docview.wss?uid=swg27035486
+   http://www-01.ibm.com/support/docview.wss?uid=swg27035486
