@@ -22,11 +22,11 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 
 	* MDM_COLLAB_ED_V11.0.tar.gz
 
-- [ ] Download IBM Data Server Driver Package from [IBM Fix Central](http://www-01.ibm.com/support/docview.wss?uid=swg27016878) and place the file in the ```db2``` folder
+- [ ] Download [IBM Data Server Driver Package](http://www-01.ibm.com/support/docview.wss?uid=swg27016878) from IBM Fix Central and place the file in the ```db2``` folder
 
 	* v10.5fp9_linuxx64_client.tar.gz
 
-- [ ] Download IBM Installation Manager from IBM Fix Central and place the file in the ```im``` folder
+- [ ] Download [IBM Installation Manager](https://www-945.ibm.com/support/fixcentral/swg/selectFixes?parent=ibm%2FRational&product=ibm/Rational/IBM+Installation+Manager&release=1.8.7.1&platform=Linux&function=all) from IBM Fix Central and place the file in the ```im``` folder
 
 	* agent.installer.linux.gtk.x86_64_1.8.8000.20171130_1105.zip
 
