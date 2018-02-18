@@ -52,7 +52,7 @@ https://localhost:9043/ibm/console/login.do
 ### Open a bash shell in the running container
 
 ```
-docker exec -it mdmce bash
+docker exec -it mdm-ce bash
 ```
 
 ### WAS Administrative Console
@@ -76,14 +76,17 @@ You can start and stop Master Data Management Collaboration Server and all servi
 
 2. Use the username, password, and company to sign in
 
-	username: Admin
-	password: trinitron
-	company: test
+	* username: Admin
+	* password: trinitron
+	* company: test
 
 ## References
 
-1. IBM InfoSphere Master Data Management, Version 11 documentation (https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ovr.doc/pim_ref_overview.html?pos=2)
+1. IBM InfoSphere Master Data Management, Version 11 documentation
+	https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ovr.doc/pim_ref_overview.html?pos=2
 
-2. InfoSphere MDM Collaboration Server Installation Guide (https://www.ibm.com/support/knowledgecenter/SSWSR9_11.0.0/com.ibm.pim.ins.doc/Install.pdf?view=kc)
+2. InfoSphere MDM Collaboration Server Installation Guide
+	https://www.ibm.com/support/knowledgecenter/SSWSR9_11.0.0/com.ibm.pim.ins.doc/Install.pdf?view=kc
 
-3. System requirements for InfoSphere Master Data Management (http://www-01.ibm.com/support/docview.wss?uid=swg27035486)
+3. System requirements for InfoSphere Master Data Management
+	http://www-01.ibm.com/support/docview.wss?uid=swg27035486
