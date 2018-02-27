@@ -53,15 +53,15 @@ Note! Installing the product in graphical or silent mode fails on WebSphre Appli
 ### Start MDM CE in a new container
 
 ```
-docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 mdm-ce:11.6
+docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 -p 9090:9090 mdm-ce:11.6
 ```
 
 <!--
-docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 -p 9043:9043 -p 9443:9443 mdm-ce:11.0
+docker run --name mdm-ce --hostname mdmce -d -p 7507:7507 -p 9090:9090 -p 9043:9043 -p 9443:9443 mdm-ce:11.6
 xhost + 192.168.8.118
-docker run --name mdm-ce --hostname mdmce -e DISPLAY=192.168.8.118:0 --rm -it -p 7507:7507 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.6 bash
+docker run --name mdm-ce --hostname mdmce -e DISPLAY=192.168.8.118:0 -it -p 7507:7507 -p 7707:7707 -p 9090:9090 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.6 bash
 
-docker run --name mdm-ce --hostname mdmce -e DISPLAY=9.183.71.231:0 --rm -it -p 7507:7507 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.6 bash
+docker run --name mdm-ce --hostname mdmce -e DISPLAY=9.183.71.231:0 -it -p 7507:7507 -p 7707:7707 -p 9090:9090 -p 9043:9043 -p 9443:9443 -v $(pwd):/share mdm-ce:11.6 bash
 
 https://localhost:9043/ibm/console/login.do
 

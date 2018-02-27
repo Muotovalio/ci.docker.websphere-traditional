@@ -1,5 +1,5 @@
-FROM ibmcom/websphere-traditional:8.5.5.12-profile
-#FROM ibmcom/websphere-traditional:9.0.0.6-profile
+FROM ibmcom/websphere-traditional:9.0.0.6-profile
+#FROM ibmcom/websphere-traditional:8.5.5.12-profile
 
 ARG DB2_NODE=DBEXPC
 ARG DB2_SERVER=172.17.0.2
@@ -42,6 +42,7 @@ RUN apt-get update && apt-get install -y libpam0g:i386
 RUN apt-get update && apt-get install -y language-pack-en-base  
 
 RUN apt-get update && apt-get install -y vim
+RUN apt-get update && apt-get install -y locate
 
 RUN echo "\033[1;34mInstall Perl modules\033[0m"
 RUN (echo y;echo o conf prerequisites_policy follow;echo o conf commit)|cpan
@@ -55,6 +56,8 @@ RUN cpan File::Temp
 RUN cpan File::Basename
 RUN cpan IO::Handle
 RUN cpan File::Path
+#Warning: Cannot install Util::EnvConfig, don't know what it is.
+#RUN cpan Util::EnvConfig
 
 RUN echo "\033[1;34mInstall packages needed to run X11 / IBMIM\033[0m"
 
@@ -65,7 +68,6 @@ RUN apt-get update && apt-get install -y libxft2
 
 ### TODO Enabling multicast network traffic
 ### https://www.ibm.com/support/knowledgecenter/en/SSWSR9_11.0.0/com.ibm.pim.ins.doc/pim_tsk_enablingmulticast.html?pos=2
-
 
 ########## IBM DB2 Data Server Client ######################################
 
@@ -104,28 +106,15 @@ ENV PATH /home/was/IBM/InstallationManager/eclipse/tools:$PATH
 
 RUN echo "\033[1;34mAdding offerings to IBM Installation Manager\033[0m"
 
-COPY --chown=was:was mdm/*tar /tmp/
-#COPY --chown=was:was mdm/*gz /tmp/
-
 # InfoSphere InfoSphere MDM CE 11.6
+COPY --chown=was:was mdm/INFOSP_MDM_COLLABORATION_SERVER_F.tar /tmp/
 RUN mkdir -p /tmp/mdm/mdmce \
 	&& tar xf /tmp/INFOSP_MDM_COLLABORATION_SERVER_F.tar -C /tmp/mdm/mdmce \
 #	&& unzip -qd /tmp/mdm/mdmce/Collaborative_disks/ /tmp/mdm/mdmce/Collaborative_disks/disk1.zip \
 	&& cd /tmp/mdm/mdmce/Collaborative_disks \
-	&& /opt/IBM/WebSphere/AppServer/java/bin/jar -xf disk1.zip \
+	&& /opt/IBM/WebSphere/AppServer/java/8.0/bin/jar -xf disk1.zip \
+#	&& /opt/IBM/WebSphere/AppServer/java/bin/jar -xf disk1.zip \
 	&& rm /tmp/INFOSP_MDM_COLLABORATION_SERVER_F.tar
-
-# InfoSphere InfoSphere MDM CE 11.0.0.0
-#RUN mkdir -p /tmp/mdm/mdmce \
-#	&& tar xzf /tmp/MDM_COLLAB_ED_V11.0.tar.gz -C /tmp/mdm/mdmce \
-#	&& rm /tmp/MDM_COLLAB_ED_V11.0.tar.gz
-
-#RUN mkdir -p /tmp/mdm/StartupKit \
-#	&& tar xzf /tmp/INSTL_STUP_TK_IMDM_V11.0.tar.gz -C /tmp/mdm/StartupKit \
-#	&& rm /tmp/INSTL_STUP_TK_IMDM_V11.0.tar.gz
-
-#RUN unzip -qd /tmp/mdm/la /tmp/IMDM_COLLABORATIVE_EDITION_V11.0.zip \
-#	&& rm /tmp/IMDM_COLLABORATIVE_EDITION_V11.0.zip
 
 ########## IBM WebSphere Application Server ################################
 
@@ -137,8 +126,8 @@ RUN /tmp/mdm/reset_password.sh
 ########## IBM MDM CE ######################################################
 
 RUN echo "\033[1;34mInstall InfoSphere MDM CE using silent mode\033[0m"
-COPY --chown=was:was mdm/install_mdm_ce_11.0.rsp /tmp/mdm/
 COPY --chown=was:was mdm/install_mdm_ce_11.6.rsp /tmp/mdm/
+COPY --chown=was:was mdm/extract_mdm_ce_11.6.rsp /tmp/mdm/
 
 # Setting the environment variables
 ENV PERL5LIB /opt/IBM/MDMCE/bin/perllib
@@ -153,17 +142,50 @@ RUN echo "export LC_CTYPE=en_US.UTF-8" >> $HOME/.bashrc
 RUN echo "export LC_ALL=en_US.UTF-8" >> $HOME/.bashrc
 RUN echo "export DB2DIR=/opt/ibm/db2/V10.5" >> $HOME/.bashrc
 RUN echo "export DB2INSTANCE=db2inst1" >> $HOME/.bashrc
+RUN echo ". /opt/IBM/MDMCE/bin/compat.sh" >> $HOME/.bashrc
 
-## 11.6
+# Install MDM CE 11.6
 RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
-	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install_mdm_ce_11.6.rsp -log /tmp/mdm/install.log -acceptLicense
+#	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/install_mdm_ce_11.6.rsp -log /tmp/mdm/install.log -acceptLicense
+	&& /home/was/IBM/InstallationManager/eclipse/tools/imcl input /tmp/mdm/extract_mdm_ce_11.6.rsp -log /tmp/mdm/install.log -acceptLicense
 
-# Setting up a test company using a script (username: Admin, password: trinitron, company: test
-RUN /opt/IBM/MDMCE/bin/db/create_cmp.sh --code=test
+# Manual install
+#/opt/IBM/WebSphere/AppServer/bin/startServer.sh server1
+COPY --chown=was:was mdm/env_settings.ini /opt/IBM/MDMCE/bin/conf/env_settings.ini
+WORKDIR /opt/IBM/MDMCE
+RUN ./setup.sh --overwrite
+RUN ./bin/configureEnv.sh --overwrite 
+RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
+	&& . /opt/IBM/MDMCE/bin/compat.sh \
+	&& $TOP/bin/websphere/create_vhost.sh --silent  --wsadminUsername wsadmin --wsadminPwd wsadminpwd \
+	&& $TOP/bin/websphere/create_appsvr.sh --silent  --wsadminUsername wsadmin --wsadminPwd wsadminpwd \
+	&& $TOP/bin/websphere/install_war.sh --silent  --wsadminUsername wsadmin --wsadminPwd wsadminpwd \
+	&& $TOP/bin/websphere/install_gds_war.sh --silent  --wsadminUsername wsadmin --wsadminPwd wsadminpwd 
+	
+#RUN ./bin/test_db.sh 
+RUN ./bin/db/create_schema.sh --silent
+
+## MDM CE 11.6 Fix Pack 6
+COPY --chown=was:was mdm/ccd_11.6.0.6_201802050124.tar.gz.gz /tmp/mdm/
+RUN tar zxf /tmp/mdm/ccd_11.6.0.6_201802050124.tar.gz.gz -C /opt/IBM/MDMCE/
+COPY --chown=was:was mdm/env_settings.ini /opt/IBM/MDMCE/bin/conf/env_settings.ini
+WORKDIR /opt/IBM/MDMCE
+RUN ./setup.sh --overwrite
+RUN ./bin/configureEnv.sh --overwrite 
+RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
+	&& ./bin/websphere/install_war.sh --wsadminUsername=wsadmin --wsadminPwd=wsadminpwd --silent
+
+# Setting up a test company using a script (username: Admin, password: trinitron, company: Acme
+RUN /opt/IBM/MDMCE/bin/db/create_cmp.sh --code=Acme --silent
+
+## TODO Cleanup
+# RUN rm -rf /tmp/mdm/
 
 # Start MDM CE and all services
 COPY mdm/start_mdm.sh /work/
 CMD ["/work/start_mdm.sh"]
+
+########## Cleanup #########################################################
 
 WORKDIR /home/was/
 
