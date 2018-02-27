@@ -14,6 +14,8 @@ Use this image for an installation of InfoSphere MDM.
 
 ### Build
 
+- [ ] Build and start DB2 in a new container
+
 - [ ] Download Master Data Management from the SSW Software Downloads site / Passport Advantage
 
 	* IBM InfoSphere Master Data Management Standard and Advanced Edition Mulitplatform Multilingual V11.6.0.4 Part 1 (CNPB8EN )
