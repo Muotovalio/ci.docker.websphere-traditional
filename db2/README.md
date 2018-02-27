@@ -20,7 +20,7 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 
 ## Supported tags
 
-11.0
+11.6, 11.0
 
 ## How to use this image
 
@@ -37,8 +37,11 @@ IBM InfoSphere MDM Advanced Edition enables multiple MDM styles and domains to w
 - [ ] Build an image from a Dockerfile
 
 ```
-docker build -t mdm-db2:11.0 .
+docker build -t mdm-db2:11.6 .
 ```
+<!--
+docker build -t mdm-db2:11.0 .
+-->
 
 <!--
 /tmp/bpm/IM64/userinstc -acceptLicense input /share/bpmExp_linux_response_nonroot_64bit.xml -log /tmp/silent_install.log
@@ -47,13 +50,11 @@ docker build -t mdm-db2:11.0 .
 ### Start DB2 in a new container
 
 ```
+docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1pwd -e LICENSE=accept mdm-db2:11.6 db2start
+```
+<!--
 docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1pwd -e LICENSE=accept mdm-db2:11.0 db2start
-```
-
-```
-docker run --name mdm-db2 --hostname mdmdb2 -d -p 50000:50000 -e DB2INST1_PASSWORD=db2inst1pwd -e LICENSE=accept mdm-db2:11.0 db2start
-```
-
+-->
 
 ### Open a bash shell in the running container
 
