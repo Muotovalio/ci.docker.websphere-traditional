@@ -1,0 +1,32 @@
+FROM mdm-ce
+
+## TODO Installing the Persona-based UI
+## TODO FP4
+COPY --chown=was:was mdm/mdmceui/* /tmp/mdm/
+#RUN tar zxf /tmp/mdm/mdmceui_11.6.0.6_201802050124.tar.gz -C /opt/IBM/
+RUN tar zxf /tmp/mdm/mdmceui_11.6.0.4_201711060532.tar.gz -C /opt/IBM/
+
+ENV TOP_MDMCEUI /opt/IBM/mdmceui
+ENV MDMCEUI_PERLLIB $TOP_MDMCEUI/bin/perllib
+RUN echo "export TOP_MDMCEUI=/opt/IBM/mdmceui" >> $HOME/.bashrc
+RUN echo "export MDMCEUI_PERLLIB=$TOP_MDMCEUI/bin/perllib" >> $HOME/.bashrc
+## TODO JAVA8_HOME
+COPY --chown=was:was mdm/mdmceui/newui_env_settings.ini /opt/IBM/mdmceui/conf/newui_env_settings.ini
+RUN chmod -R 755 /opt/IBM/mdmceui/bin/* 
+WORKDIR /opt/IBM/mdmceui/bin
+#RUN /opt/IBM/WebSphere/AppServer/profiles/AppSrv01/bin/startServer.sh server1 \
+#	&& . /opt/IBM/MDMCE/bin/compat.sh \
+#	&& ./installAll.sh -ov
+
+## TODO import datamodel $TOP_MDMCEUI/env-export/mdmenv/mdmce-env.ZIP
+## TODO import datamodel $TOP_MDMCEUI/env-export/dammodel/dammodel.ZIP
+#http://localhost:9090/mdm_ce_ui
+#
+
+# TODO Cleanup
+#RUN rm -rf /tmp/mdm/
+
+# TODO Start MDM CE and all services
+#COPY mdm/start_mdm.sh /work/
+#CMD ["/work/start_mdm.sh"]
+

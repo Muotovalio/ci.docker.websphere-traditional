@@ -1,0 +1,10 @@
+## Supplier Persona UI 11.6.0.0 (not tested)
+#RUN tar xzf "/tmp/mdm/mdmce/Samples/Supplier Persona/mdmnextgenui-11.6.0.0-20161025122623.tgz" -C /opt/IBM
+#COPY --chown=was:was mdm/mdmnextgenui/config.properties /opt/IBM/mdmnextgenui/dynamic/nextgenui/
+#COPY --chown=was:was mdm/mdmnextgenui/common.properties /opt/IBM/mdmnextgenui/dynamic/mdmrest/
+#ENV PERLLIB /opt/IBM/mdmnextgenui/bin/perllib
+#ENV TOP_NXTGENUI /opt/IBM/mdmnextgenui
+#RUN chmod -R 755 /opt/IBM/mdmnextgenui/bin/*
+#WORKDIR /opt/IBM/mdmnextgenui/bin
+#RUN ./installAll.sh
+#RUN /opt/IBM/WebSphere/AppServer/bin/startServer.sh mdmnextgenui
