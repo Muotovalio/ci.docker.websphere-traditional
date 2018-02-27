@@ -10,6 +10,8 @@ ARG WASPASSWORD=waspwd
 
 USER root
 
+########## User account and permissions ####################################
+
 # Reset was password
 RUN echo ${WASUSER}:${WASPASSWORD} | chpasswd
 
