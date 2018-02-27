@@ -49,7 +49,7 @@
     <data key='user.ce.locale,com.ibm.mdm.collaborative' value='en_US'/>
     <data key='user.ce.http.port,com.ibm.mdm.collaborative' value='7507'/>
     <data key='user.ce.cache.multicast.ttl,com.ibm.mdm.collaborative' value='0'/>
-    <data key='user.ce.jdk.path,com.ibm.mdm.collaborative' value='/opt/IBM/WebSphere/AppServer/java'/>
+    <data key='user.ce.jdk.path,com.ibm.mdm.collaborative' value='/opt/IBM/WebSphere/AppServer/java/8.0'/>
     <data key='user.ce.rmi.port,com.ibm.mdm.collaborative' value='17507'/>
     <data key='user.ce.perl.directory,com.ibm.mdm.collaborative' value='/usr'/>
     <data key='user.db.type' value='DB2'/>
