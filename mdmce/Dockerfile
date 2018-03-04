@@ -2,7 +2,7 @@ FROM ibmcom/websphere-traditional:9.0.0.6-profile
 #FROM ibmcom/websphere-traditional:8.5.5.12-profile
 
 ARG DB2_NODE=DBEXPC
-ARG DB2_SERVER=172.17.0.2
+ARG DB2_SERVER=172.18.0.2
 ARG DB2_PORT=50000
 ARG DB2_DBNAME=PIMDB
 

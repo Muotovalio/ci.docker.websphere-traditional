@@ -11,7 +11,7 @@
     <data key='user.mdm.edition.offering.id' value='com.ibm.mdm.collaborative'/>
     <data key='user.skipErrorMessageUserData,com.ibm.mdm.collaborative' value='false'/>
     <data key='user.db.auth.native,com.ibm.mdm.collaborative' value='false'/>
-    <data key='user.db.host,com.ibm.mdm.collaborative' value='172.17.0.2'/>
+    <data key='user.db.host,com.ibm.mdm.collaborative' value='172.18.0.2'/>
     <data key='user.db.type,com.ibm.mdm.collaborative' value='DB2'/>
     <data key='user.db.schema,com.ibm.mdm.collaborative' value='PIMDB1'/>
     <data key='user.db.ssl.enabled,com.ibm.mdm.collaborative' value='false'/>

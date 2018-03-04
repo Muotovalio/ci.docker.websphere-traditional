@@ -14,7 +14,7 @@ IBM InfoSphere Master Data Management Collaborative Edition (MDM CE) provides a 
 
 - [ ] Build and start DB2 in a new container
 
-	**Note:** MDM CE installation assumes DB2 container has IP address 172.17.0.2
+	**Note:** MDM CE installation assumes DB2 container has IP address 172.18.0.2
 
 - [ ] Download Master Data Management Collaboration Edition from the SSW Software Downloads site / Passport Advantage
 
